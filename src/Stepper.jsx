@@ -12,42 +12,40 @@ import CheckIcon from "@mui/icons-material/Check";
 import { styled } from "@mui/material/styles";
 import { useState } from "react";
 
+
+const MyStepper = styled(Box)(() => ({
+  display: "flex",
+  margin: "0% 5%",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
 const ConnectorCustom = styled(Box)(({ theme, active }) => ({
   height: 2,
   border: 0,
-  backgroundColor: active ? "#fb9714" : "#89a6aa",
-  width: "35px",
-  [theme.breakpoints.up("sm")]: {
-    width: "80px",
-  },
-  [theme.breakpoints.up("md")]: {
-    width: "130px",
-  },
+  width: "100%",
   borderRadius: 1,
-  marginLeft: "10px",
-  transition: "background-color 0.5s ease-in-out", // Add transition for color
+  backgroundColor: active ? "#fb9714" : "#89a6aa",
+  transition: "background-color 0.5s ease-in-out", 
 }));
 
 const StepIconCustom = styled(Box)(({ active, isLastActive }) => ({
   width: 22,
   height: 22,
   fontSize: 12,
-  minWidth: "22px",
-  borderRadius: "50%",
-  background: isLastActive ? "#ff5309" : active ? "#ff9d1d" : "#89a6aa",
+  color: "white",
   display: "flex",
+  minWidth: "22px",
+  margin: "0px 10px",
+  borderRadius: "50%",
   alignItems: "center",
   justifyContent: "center",
-  color: "white",
   transition: "background-color 0.5s ease-in-out", 
+  background: isLastActive ? "#ff5309" : active ? "#ff9d1d" : "#89a6aa",
 }));
 
-const MyStepper = styled(Box)(({ theme }) => ({
-  gap: "8px",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
+
+
 const StepTitle = styled(Typography)(({ active }) => ({
   width: "130px",
   textAlign: "center",
@@ -103,11 +101,11 @@ const Stepper = () => {
       <Box sx={{ maxWidth: "800px", width: "100%" }}>
         <MyStepper>
           {Label.map((_, index) => (
-            <Box key={index} sx={{ display: "flex", alignItems: "center" }}>
+            <Box key={index} sx={{ display: "flex", alignItems: "center", width: index === Label.length - 1 ? "fit-content" : "100%" }}>
               <StepIconCustom
                 active={activeStep > index}
                 isLastActive={activeStep === index}
-              >
+                >
                 {activeStep > index ? (
                   <CheckIcon sx={{ fontSize: 16 }} />
                 ) : (
